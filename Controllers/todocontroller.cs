@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using W1.Models;
+using System.Text.Json;
 
 namespace W1.Controllers
 {
@@ -28,25 +29,30 @@ namespace W1.Controllers
         } 
         
         [HttpGet("{id}", Name = "GetTodo")] 
-        public ActionResult<todoitem> GetById(int id) 
+        public string GetById(int id) 
         {    
         var item = _context.TodoItems.Find(id);     
         if (item == null)    
         {         
-        return NotFound();     
+            string b="NotFound";
+        return b;     
         }     
-        return item; 
+        var opt=new JsonSerializerOptions{WriteIndented=true};
+            string a="Task list \n" + JsonSerializer.Serialize(_context.TodoItems,opt);    
+            return a;
         }
         [HttpPost]
-        public ActionResult Post(todoitem t1){
+        public string Post(todoitem t1){
             _context.TodoItems.Add(t1);
-            _context.SaveChanges();      
-            return Ok();
+            _context.SaveChanges();  
+            var opt=new JsonSerializerOptions{WriteIndented=true};
+            string a="Task list" + JsonSerializer.Serialize(t1,opt);    
+            return a;
         }
         [HttpPut("{id}")]
     public ActionResult Update(int id,todoitem item)
     {
-        if (item == null || item.id!=id)
+        if (item == null)
         {
             return BadRequest();
         }
