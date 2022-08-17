@@ -5,7 +5,8 @@ public class TodoContext : DbContext
     public TodoContext(DbContextOptions<TodoContext> options)                            : base(options)         
 {         
 }       
-    public DbSet<todoitem> TodoItems { get; set; }     
+    public DbSet<todoitem> TodoItems { get; set; }  
+    public DbSet<todoitem.item> items{get;set;}  
   
    } 
 }
