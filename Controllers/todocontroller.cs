@@ -25,24 +25,31 @@ namespace W1.Controllers
         
         [HttpGet("{id}", Name = "GetTodo")] 
         public string GetById(int id) 
-        {    
-        var item = _context.TodoItems.Find(id);     
-        if (item == null)    
+        {        
+        var he=_context.TodoItems.Find(id);
+        var hu =_context.items.Find(id);
+        if (hu == null)    
         {         
-            string b="NotFound";
-        return b; 
-        }     
+            string b="NotFound2";
+            return b; 
+        } 
         var opt=new JsonSerializerOptions{WriteIndented=true};
-            string a="Task list \n" + JsonSerializer.Serialize(_context.TodoItems,opt);    
+            string a="Task list \n" + JsonSerializer.Serialize(he,opt); 
+            if (he == null)    
+        {         
+            string b="NotFound1";
+            return b; 
+        }    
+        Console.WriteLine(a);
             return a;
         }
         [HttpPost]
-        public string Post([FromBody] todoitem t1){
+        public todoitem Post([FromBody] todoitem t1){
             _context.TodoItems.Add(t1);
-            _context.SaveChanges();  
-            var opt=new JsonSerializerOptions{WriteIndented=true};
-            string a="Task list" + JsonSerializer.Serialize(t1,opt);    
-            return a;
+            _context.items.Add(t1._item);
+            _context.SaveChanges(); 
+            
+            return t1;
         }
         [HttpPut("{id}")]
     public ActionResult Update(int id,todoitem item)
@@ -58,7 +65,7 @@ namespace W1.Controllers
             return NotFound();
         }
 
-        supplier.i1.desc = item.i1.desc;
+        supplier._item.desc = item._item.desc;
 
         _context.TodoItems.Update(supplier);
         _context.SaveChanges();
