@@ -127,3 +127,6 @@
 /home/uday/Documents/code/W1/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Logging.Abstractions.dll
 /home/uday/Documents/code/W1/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Options.dll
 /home/uday/Documents/code/W1/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Primitives.dll
+/home/uday/Documents/code/W1/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.JsonPatch.dll
+/home/uday/Documents/code/W1/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/uday/Documents/code/W1/bin/Debug/netcoreapp3.1/Newtonsoft.Json.Bson.dll
