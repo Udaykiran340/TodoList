@@ -16,11 +16,6 @@ namespace W1.Controllers
         private readonly TodoContext _context;
         public TodoController(TodoContext context){
              _context = context;              
-                if (_context.TodoItems.Count() == 0)
-                {                 
-                _context.TodoItems.Add(new todoitem { desc = "Item1" });
-                _context.SaveChanges();             
-                }         
         }
         [HttpGet] 
         public ActionResult<List<todoitem>> GetAll() 
@@ -42,7 +37,7 @@ namespace W1.Controllers
             return a;
         }
         [HttpPost]
-        public string Post(todoitem t1){
+        public string Post([FromBody] todoitem t1){
             _context.TodoItems.Add(t1);
             _context.SaveChanges();  
             var opt=new JsonSerializerOptions{WriteIndented=true};
@@ -63,7 +58,7 @@ namespace W1.Controllers
             return NotFound();
         }
 
-        supplier.desc = item.desc;
+        supplier.i1.desc = item.i1.desc;
 
         _context.TodoItems.Update(supplier);
         _context.SaveChanges();
