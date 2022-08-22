@@ -18,9 +18,12 @@ namespace W1.Controllers
              _context = context;              
         }
         [HttpGet] 
-        public ActionResult<List<todoitem>> GetAll() 
+        public string GetAll() 
         {     
-        return _context.TodoItems.ToList(); 
+            var opt=new JsonSerializerOptions{WriteIndented=true};
+            string a="Task list \n" + JsonSerializer.Serialize(_context.TodoItems,opt); 
+            Console.WriteLine(a);
+        return a; 
         } 
         
         [HttpGet("{id}", Name = "GetTodo")] 
